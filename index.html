@@ -268,6 +268,8 @@
     margin:36px 0 4px;
   }
   .sub-eyebrow:first-child{ margin-top:0; }
+  .section-head + .sub-eyebrow{ margin-top:0; }
+  .sub-eyebrow + .timeline{ margin-top:14px; }
 
   /* ---------- publications ---------- */
   .pub{
@@ -323,8 +325,47 @@
     margin:0;
   }
 
+  section[id]{ scroll-margin-top:72px; }
+
+  .menu-toggle{
+    display:none;
+    width:34px; height:28px;
+    padding:0;
+    background:transparent;
+    border:1px solid var(--line);
+    border-radius:3px;
+    cursor:pointer;
+    color:var(--ink);
+    align-items:center;
+    justify-content:center;
+  }
+  .menu-toggle svg{ display:block; }
+  .menu-toggle .x{ display:none; }
+  header.menu-open .menu-toggle .bars{ display:none; }
+  header.menu-open .menu-toggle .x{ display:block; }
+
   @media (max-width:900px){
-    nav{ display:none; }
+    header{ padding:14px 0; }
+    .header-right{ gap:10px; }
+    .menu-toggle{ display:inline-flex; }
+    nav{
+      display:none;
+      position:absolute;
+      top:100%; left:0; right:0;
+      flex-direction:column;
+      gap:0;
+      background:var(--bg);
+      border-bottom:1px solid var(--line);
+      box-shadow:0 10px 24px rgba(22,32,31,.08);
+      padding:6px 16px 12px;
+    }
+    header.menu-open nav{ display:flex; }
+    nav a{
+      font-size:14px;
+      padding:13px 0;
+      border-bottom:1px solid var(--line);
+    }
+    nav a:last-child{ border-bottom:0; }
   }
 
   @media (max-width:640px){
@@ -350,7 +391,7 @@
   <div class="wrap">
     <a class="brand" href="#top">D. Pérez Filgueiras</a>
     <div class="header-right">
-      <nav>
+      <nav id="siteNav">
         <a href="#about"><span class="en">About</span><span class="es">Sobre mí</span></a>
         <a href="#timeline"><span class="en">Timeline</span><span class="es">Trayectoria</span></a>
         <a href="#work"><span class="en">Work</span><span class="es">Proyectos</span></a>
@@ -359,6 +400,10 @@
         <a href="#contact"><span class="en">Contact</span><span class="es">Contacto</span></a>
       </nav>
       <button class="lang-toggle" id="langToggle" type="button" aria-label="Cambiar a español">ES</button>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="siteNav">
+        <svg class="bars" width="16" height="12" viewBox="0 0 16 12" aria-hidden="true"><path d="M0 1h16M0 6h16M0 11h16" stroke="currentColor" stroke-width="1.5"/></svg>
+        <svg class="x" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5"/></svg>
+      </button>
     </div>
   </div>
 </header>
@@ -418,31 +463,12 @@
         <p class="eyebrow"><span class="en">Timeline</span><span class="es">Trayectoria</span></p>
         <h2><span class="en">Career so far</span><span class="es">Hasta ahora</span></h2>
       </div>
+      <p class="sub-eyebrow"><span class="en">Experience</span><span class="es">Experiencia</span></p>
       <div class="timeline">
-        <div class="tl-item">
-          <span class="tl-year">2019 – 2023</span>
-          <h3><span class="en">B.Eng. in Computer Engineering</span><span class="es">Grado en Ingeniería Informática</span></h3>
-          <p><span class="en">Public University of Navarra — Computing and Intelligent Systems.</span><span class="es">Universidad Pública de Navarra — Computación y Sistemas Inteligentes.</span></p>
-        </div>
-        <div class="tl-item">
-          <span class="tl-year"><span class="en">Jul 2022 – Jul 2023</span><span class="es">jul 2022 – jul 2023</span></span>
-          <h3><span class="en">Data Analyst, Tecnológica CCS</span><span class="es">Analista de datos, Tecnológica CCS</span></h3>
-          <p><span class="en">Power BI dashboards and business intelligence reporting.</span><span class="es">Dashboards en Power BI y reporting de inteligencia de negocio.</span></p>
-        </div>
         <div class="tl-item current">
-          <span class="tl-year"><span class="en">Jul 2023 – Present</span><span class="es">jul 2023 – actualidad</span></span>
-          <h3>Data Scientist, Tecnológica CCS</h3>
-          <p><span class="en">AI systems for healthcare, industrial safety and sports performance, from prototype to production. LLM platforms, agents and agent harnesses.</span><span class="es">Sistemas de IA para salud, seguridad laboral y rendimiento deportivo, del prototipo a producción. Plataformas LLM, agentes y agent harnesses.</span></p>
-        </div>
-        <div class="tl-item">
-          <span class="tl-year">2023 – 2024</span>
-          <h3><span class="en">M.Sc. in Data Science and Computer Engineering</span><span class="es">Máster en Ciencia de Datos e Ingeniería de Computadores</span></h3>
-          <p><span class="en">University of Granada.</span><span class="es">Universidad de Granada.</span></p>
-        </div>
-        <div class="tl-item current">
-          <span class="tl-year"><span class="en">Nov 2024 – Present</span><span class="es">nov 2024 – actualidad</span></span>
-          <h3><span class="en">Ph.D. Candidate, Intelligent Decision Support Systems</span><span class="es">Doctorando, Sistemas Inteligentes de Apoyo a la Decisión</span></h3>
-          <p><span class="en">University of Granada — DaSCI and ibs.GRANADA (MP10 – Translational Bioinformatics). Hybrid algorithms for longitudinal recommender systems.</span><span class="es">Universidad de Granada — DaSCI e ibs.GRANADA (MP10 – Bioinformática Traslacional). Algoritmos híbridos para sistemas de recomendación longitudinales.</span></p>
+          <span class="tl-year"><span class="en">Sep 2025 – Present</span><span class="es">sep 2025 – actualidad</span></span>
+          <h3><span class="en">Research Collaborator, Glenn Biggs Institute</span><span class="es">Colaborador de investigación, Glenn Biggs Institute</span></h3>
+          <p><span class="en">UT Health San Antonio (remote) — brain stimulation response research and the ISAVRAD multimodal patient database.</span><span class="es">UT Health San Antonio (en remoto) — investigación sobre respuesta a la estimulación cerebral y base de datos multimodal de pacientes ISAVRAD.</span></p>
         </div>
         <div class="tl-item">
           <span class="tl-year"><span class="en">Jun – Sep 2025</span><span class="es">jun – sep 2025</span></span>
@@ -450,9 +476,33 @@
           <p><span class="en">UT Health San Antonio — research on non-invasive therapeutic interventions for Alzheimer's disease, in Dr. de Erausquin's group.</span><span class="es">UT Health San Antonio — investigación en intervenciones terapéuticas no invasivas para el Alzheimer, en el grupo del Dr. de Erausquin.</span></p>
         </div>
         <div class="tl-item current">
-          <span class="tl-year"><span class="en">Sep 2025 – Present</span><span class="es">sep 2025 – actualidad</span></span>
-          <h3><span class="en">Research Collaborator, Glenn Biggs Institute</span><span class="es">Colaborador de investigación, Glenn Biggs Institute</span></h3>
-          <p><span class="en">UT Health San Antonio (remote) — brain stimulation response research and the ISAVRAD multimodal patient database.</span><span class="es">UT Health San Antonio (en remoto) — investigación sobre respuesta a la estimulación cerebral y base de datos multimodal de pacientes ISAVRAD.</span></p>
+          <span class="tl-year"><span class="en">Jul 2023 – Present</span><span class="es">jul 2023 – actualidad</span></span>
+          <h3>Data Scientist, Tecnológica CCS</h3>
+          <p><span class="en">AI systems for healthcare, industrial safety and sports performance, from prototype to production. LLM platforms, agents and agent harnesses.</span><span class="es">Sistemas de IA para salud, seguridad laboral y rendimiento deportivo, del prototipo a producción. Plataformas LLM, agentes y agent harnesses.</span></p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-year"><span class="en">Jul 2022 – Jul 2023</span><span class="es">jul 2022 – jul 2023</span></span>
+          <h3><span class="en">Data Analyst, Tecnológica CCS</span><span class="es">Analista de datos, Tecnológica CCS</span></h3>
+          <p><span class="en">Power BI dashboards and business intelligence reporting.</span><span class="es">Dashboards en Power BI y reporting de inteligencia de negocio.</span></p>
+        </div>
+      </div>
+
+      <p class="sub-eyebrow"><span class="en">Education</span><span class="es">Formación</span></p>
+      <div class="timeline">
+        <div class="tl-item current">
+          <span class="tl-year"><span class="en">Nov 2024 – Present</span><span class="es">nov 2024 – actualidad</span></span>
+          <h3><span class="en">Ph.D. Candidate, Intelligent Decision Support Systems</span><span class="es">Doctorando, Sistemas Inteligentes de Apoyo a la Decisión</span></h3>
+          <p><span class="en">University of Granada — DaSCI and ibs.GRANADA (MP10 – Translational Bioinformatics). Hybrid algorithms for longitudinal recommender systems.</span><span class="es">Universidad de Granada — DaSCI e ibs.GRANADA (MP10 – Bioinformática Traslacional). Algoritmos híbridos para sistemas de recomendación longitudinales.</span></p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-year">2023 – 2024</span>
+          <h3><span class="en">M.Sc. in Data Science and Computer Engineering</span><span class="es">Máster en Ciencia de Datos e Ingeniería de Computadores</span></h3>
+          <p><span class="en">University of Granada.</span><span class="es">Universidad de Granada.</span></p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-year">2019 – 2023</span>
+          <h3><span class="en">B.Eng. in Computer Engineering</span><span class="es">Grado en Ingeniería Informática</span></h3>
+          <p><span class="en">Public University of Navarra — Computing and Intelligent Systems.</span><span class="es">Universidad Pública de Navarra — Computación y Sistemas Inteligentes.</span></p>
         </div>
       </div>
     </div>
@@ -651,6 +701,28 @@
 
   btn.addEventListener('click', function(){
     setLang(document.body.classList.contains('es') ? 'en' : 'es');
+  });
+
+  // mobile dropdown menu
+  var header = document.querySelector('header');
+  var menuBtn = document.getElementById('menuToggle');
+  var nav = document.getElementById('siteNav');
+  function setMenu(open){
+    header.classList.toggle('menu-open', open);
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  menuBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    setMenu(!header.classList.contains('menu-open'));
+  });
+  nav.addEventListener('click', function(e){
+    if (e.target.closest('a')) setMenu(false);
+  });
+  document.addEventListener('click', function(e){
+    if (!header.contains(e.target)) setMenu(false);
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') setMenu(false);
   });
 })();
 </script>
