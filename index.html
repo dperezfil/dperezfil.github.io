@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>David Pérez Filgueiras</title>
+<meta name="description" content="Data Scientist and Ph.D. Researcher working on applied AI systems, LLM agents and intelligent decision support, at the intersection of healthcare and machine learning.">
+<link rel="canonical" href="https://davidpf8.github.io/">
+<meta property="og:url" content="https://davidpf8.github.io/">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="David Pérez Filgueiras — Data Scientist & Ph.D. Researcher">
+<meta property="og:description" content="Machine learning for healthcare and neuroscience: brain stimulation response (EEG, fNIRS), longitudinal decision recommendation, medical imaging and production AI systems.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231f4b49'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='13' fill='%23fbfbf9' text-anchor='middle'%3EDP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f7f4;
+    --bg-alt:#eef0eb;
+    --ink:#16201f;
+    --ink-soft:#4c5654;
+    --ink-faint:#8a938e;
+    --teal:#1f4b49;
+    --teal-soft:#3d6b67;
+    --pulse:#b8483d;
+    --line:#d7dbd3;
+    --paper:#fbfbf9;
+    --max:720px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', -apple-system, sans-serif;
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- language switching ---------- */
+  body:not(.es) .es{ display:none !important; }
+  body.es .en{ display:none !important; }
+
+  ::selection{ background:var(--teal); color:var(--paper); }
+
+  a{ color:inherit; }
+
+  .wrap{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--teal-soft);
+  }
+
+  h1,h2,h3{
+    font-family:'Source Serif 4', Georgia, serif;
+    font-weight:600;
+    color:var(--ink);
+    margin:0;
+  }
+
+  p{ margin:0 0 1em 0; color:var(--ink-soft); }
+  p:last-child{ margin-bottom:0; }
+
+  /* ---------- vascular motif (signature element) ---------- */
+  .vessel-bg{
+    position:absolute;
+    top:0; right:-40px;
+    width:420px; height:420px;
+    opacity:.55;
+    pointer-events:none;
+  }
+  .vessel-bg path{
+    fill:none;
+    stroke:var(--teal);
+    stroke-width:1.1;
+    stroke-linecap:round;
+    opacity:.4;
+  }
+  .vessel-bg path.artery{ stroke:var(--pulse); opacity:.32; }
+
+  /* ---------- header ---------- */
+  header{
+    padding:22px 0;
+    border-bottom:1px solid var(--line);
+    position:sticky; top:0;
+    background:rgba(246,247,244,.88);
+    backdrop-filter:blur(6px);
+    z-index:10;
+  }
+  header .wrap{
+    max-width:1040px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+  }
+  .brand{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:14px;
+    letter-spacing:.02em;
+    color:var(--ink);
+    text-decoration:none;
+    white-space:nowrap;
+  }
+  .header-right{
+    display:flex;
+    align-items:center;
+    gap:22px;
+  }
+  nav{ display:flex; gap:22px; flex-wrap:nowrap; white-space:nowrap; }
+  nav a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    text-decoration:none;
+    color:var(--ink-soft);
+    letter-spacing:.02em;
+  }
+  nav a:hover{ color:var(--teal); }
+
+  .lang-toggle{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:.06em;
+    color:var(--teal);
+    background:transparent;
+    border:1px solid var(--teal);
+    border-radius:3px;
+    padding:3px 9px;
+    cursor:pointer;
+    line-height:1.4;
+  }
+  .lang-toggle:hover{ background:var(--teal); color:var(--paper); }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    padding:88px 0 64px;
+    overflow:hidden;
+  }
+  .hero .eyebrow{ margin-bottom:18px; }
+  .hero h1{
+    font-size:clamp(36px, 5.6vw, 50px);
+    line-height:1.1;
+    letter-spacing:-.01em;
+    max-width:14ch;
+  }
+  .hero .role{
+    font-family:'Source Serif 4', serif;
+    font-style:italic;
+    font-size:20px;
+    color:var(--teal-soft);
+    margin-top:14px;
+  }
+  .hero .lede{
+    margin-top:26px;
+    max-width:54ch;
+    font-size:17px;
+  }
+  .hero-links{
+    margin-top:32px;
+    display:flex;
+    gap:22px;
+    flex-wrap:wrap;
+  }
+  .hero-links a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    text-decoration:none;
+    color:var(--ink);
+    border-bottom:1px solid var(--ink);
+    padding-bottom:2px;
+  }
+  .hero-links a:hover{ color:var(--teal); border-color:var(--teal); }
+
+  /* ---------- sections ---------- */
+  section{ padding:56px 0; }
+  section.alt{ background:var(--bg-alt); }
+  .section-head{ margin-bottom:34px; }
+  .section-head h2{ font-size:26px; margin-top:6px; }
+
+  .intro-text p{ font-size:17.5px; color:var(--ink); }
+  .intro-text p + p{ color:var(--ink-soft); }
+
+  /* ---------- timeline ---------- */
+  .timeline{
+    position:relative;
+    padding-left:26px;
+    border-left:1px solid var(--line);
+  }
+  .tl-item{
+    position:relative;
+    padding-bottom:30px;
+  }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-item::before{
+    content:'';
+    position:absolute;
+    left:-30.5px;
+    top:6px;
+    width:8px; height:8px;
+    border-radius:50%;
+    background:var(--paper);
+    border:1.6px solid var(--teal);
+  }
+  .tl-item.current::before{
+    background:var(--pulse);
+    border-color:var(--pulse);
+  }
+  .tl-year{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--ink-faint);
+    display:block;
+    margin-bottom:4px;
+  }
+  .tl-item h3{ font-size:17.5px; font-weight:500; }
+  .tl-item p{ margin-top:5px; font-size:15px; }
+
+  /* ---------- projects ---------- */
+  .project{
+    padding:26px 0;
+    border-top:1px solid var(--line);
+  }
+  .project:last-child{ border-bottom:1px solid var(--line); }
+  .project-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .project h3{ font-size:19px; font-weight:500; }
+  .project-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--teal-soft);
+    letter-spacing:.04em;
+    white-space:nowrap;
+  }
+  .project p{ margin-top:10px; max-width:60ch; font-size:15.5px; }
+  .project .metrics{
+    margin-top:12px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--ink-faint);
+  }
+  .project .metrics a{ color:var(--teal-soft); }
+  .sub-eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:36px 0 4px;
+  }
+  .sub-eyebrow:first-child{ margin-top:0; }
+
+  /* ---------- publications ---------- */
+  .pub{
+    padding:22px 0;
+    border-top:1px solid var(--line);
+  }
+  .pub:last-child{ border-bottom:1px solid var(--line); }
+  .pub h3{ font-size:17px; font-weight:500; line-height:1.4; }
+  .pub .pub-meta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-faint);
+    margin-top:8px;
+  }
+  .pub .pub-meta a{ color:var(--teal-soft); }
+
+  /* ---------- contact / footer ---------- */
+  .contact h2{ font-size:26px; }
+  .contact p{ max-width:48ch; }
+  .contact-links{
+    margin-top:26px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .contact-links a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:14.5px;
+    text-decoration:none;
+    color:var(--ink);
+    display:inline-block;
+    width:fit-content;
+    max-width:100%;
+    overflow-wrap:anywhere;
+    border-bottom:1px solid transparent;
+  }
+  .contact-links a:hover{ color:var(--teal); border-color:var(--teal); }
+
+  footer{
+    padding:30px 0 50px;
+  }
+  footer .wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  footer p{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink-faint);
+    margin:0;
+  }
+
+  @media (max-width:900px){
+    nav{ display:none; }
+  }
+
+  @media (max-width:640px){
+    .wrap{ padding:0 16px; }
+    .hero{ padding:64px 0 44px; }
+    .vessel-bg{ width:260px; height:260px; right:-70px; opacity:.35; }
+    .project-tag{ white-space:normal; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+  }
+
+  :focus-visible{
+    outline:2px solid var(--teal);
+    outline-offset:3px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#top">D. Pérez Filgueiras</a>
+    <div class="header-right">
+      <nav>
+        <a href="#about"><span class="en">About</span><span class="es">Sobre mí</span></a>
+        <a href="#timeline"><span class="en">Timeline</span><span class="es">Trayectoria</span></a>
+        <a href="#work"><span class="en">Work</span><span class="es">Proyectos</span></a>
+        <a href="#teaching"><span class="en">Teaching</span><span class="es">Docencia</span></a>
+        <a href="#publications"><span class="en">Publications</span><span class="es">Publicaciones</span></a>
+        <a href="#contact"><span class="en">Contact</span><span class="es">Contacto</span></a>
+      </nav>
+      <button class="lang-toggle" id="langToggle" type="button" aria-label="Cambiar a español">ES</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap" style="position:relative;">
+      <svg class="vessel-bg" viewBox="0 0 420 420" aria-hidden="true">
+        <path class="artery" d="M400 10 C 340 40, 320 70, 300 110 C 285 140, 270 150, 240 155"/>
+        <path class="artery" d="M300 110 C 310 150, 305 180, 290 210 C 280 230, 282 250, 300 270"/>
+        <path class="artery" d="M240 155 C 220 165, 210 180, 205 205"/>
+        <path d="M380 60 C 330 90, 310 120, 295 160 C 285 190, 265 205, 235 210"/>
+        <path d="M295 160 C 300 195, 290 220, 270 245 C 258 260, 258 280, 272 300"/>
+        <path d="M235 210 C 215 218, 200 232, 195 255"/>
+        <path d="M270 245 C 250 250, 235 262, 228 282"/>
+        <path d="M200 232 C 185 240, 175 252, 172 268"/>
+        <path class="artery" d="M290 210 C 305 225, 315 245, 312 268"/>
+      </svg>
+
+      <p class="eyebrow">David Pérez Filgueiras</p>
+      <h1><span class="en">Data Scientist &amp; Ph.D. Researcher</span><span class="es">Data Scientist e investigador predoctoral</span></h1>
+      <p class="role"><span class="en">applied AI systems · LLM agents · intelligent decision support · healthcare</span><span class="es">sistemas de IA aplicada · agentes LLM · sistemas inteligentes de apoyo a la decisión · salud</span></p>
+      <p class="lede en">Computer engineer working as a Data Scientist at Tecnológica CCS and pursuing a Ph.D. in Intelligent Decision Support Systems at the University of Granada (DaSCI), in collaboration with the Glenn Biggs Institute at UT Health San Antonio. My work moves between production AI systems and doctoral research, with a recurring focus on machine learning for healthcare.</p>
+      <p class="lede es">Ingeniero informático, trabajo como Data Scientist en Tecnológica CCS y hago el doctorado en Sistemas Inteligentes de Apoyo a la Decisión en la Universidad de Granada (DaSCI), en colaboración con el Glenn Biggs Institute de UT Health San Antonio. Mi trabajo se mueve entre sistemas de IA en producción e investigación doctoral, con un foco constante en el machine learning aplicado a la salud.</p>
+      <div class="hero-links">
+        <a href="https://www.linkedin.com/in/david-perez-filgueiras/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="mailto:davidperezfil@gmail.com">Email ↗</a>
+        <a href="https://orcid.org/0009-0009-9760-6300" target="_blank" rel="noopener">ORCID ↗</a>
+        <a href="CV_David_Perez_Filgueiras.pdf" target="_blank" rel="noopener">CV (PDF) ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span class="en">About</span><span class="es">Sobre mí</span></p>
+        <h2><span class="en">Engineering, then research</span><span class="es">Primero ingeniería, después investigación</span></h2>
+      </div>
+      <div class="intro-text en">
+        <p>I trained as a computer engineer at the Public University of Navarra, specializing in computing and intelligent systems, then completed a Master's in Data Science and Computer Engineering at the University of Granada.</p>
+        <p>I work as a Data Scientist at Tecnológica CCS (formerly CIMA Nuevas Tecnologías Informáticas), taking AI systems from prototype to production in healthcare, industrial safety and sports performance, and designing LLM agents and the harnesses that run them.</p>
+        <p>In parallel, I'm a Ph.D. Candidate at the University of Granada, affiliated with DaSCI and the ibs.GRANADA Health Research Institute (MP10 – Translational Bioinformatics), supervised by Dr. Igor Zwir. My thesis develops a hybrid framework combining Graph Neural Networks, NMF and Reinforcement Learning to recommend decisions from how users evolve over time. In 2025 I was a Visiting Researcher at the Glenn Biggs Institute for Alzheimer's &amp; Neurodegenerative Diseases (UT Health San Antonio), where I still collaborate remotely.</p>
+      </div>
+      <div class="intro-text es">
+        <p>Me formé como ingeniero informático en la Universidad Pública de Navarra, con especialidad en computación y sistemas inteligentes, y después cursé el Máster en Ciencia de Datos e Ingeniería de Computadores en la Universidad de Granada.</p>
+        <p>Trabajo como Data Scientist en Tecnológica CCS (antes CIMA Nuevas Tecnologías Informáticas), llevando sistemas de IA del prototipo a producción en salud, seguridad laboral y rendimiento deportivo, y diseñando agentes LLM y los harnesses que los ejecutan.</p>
+        <p>En paralelo, soy doctorando en la Universidad de Granada, con afiliación a DaSCI y al Instituto de Investigación Biosanitaria ibs.GRANADA (MP10 – Bioinformática Traslacional), bajo la dirección del Dr. Igor Zwir. Mi tesis desarrolla un framework híbrido que combina Graph Neural Networks, NMF y Reinforcement Learning para recomendar decisiones según cómo evolucionan los usuarios en el tiempo. En 2025 fui investigador visitante en el Glenn Biggs Institute for Alzheimer's &amp; Neurodegenerative Diseases (UT Health San Antonio), con el que sigo colaborando en remoto.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="timeline">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span class="en">Timeline</span><span class="es">Trayectoria</span></p>
+        <h2><span class="en">Career so far</span><span class="es">Hasta ahora</span></h2>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <span class="tl-year">2019 – 2023</span>
+          <h3><span class="en">B.Eng. in Computer Engineering</span><span class="es">Grado en Ingeniería Informática</span></h3>
+          <p><span class="en">Public University of Navarra — Computing and Intelligent Systems.</span><span class="es">Universidad Pública de Navarra — Computación y Sistemas Inteligentes.</span></p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-year"><span class="en">Jul 2022 – Jul 2023</span><span class="es">jul 2022 – jul 2023</span></span>
+          <h3><span class="en">Data Analyst, Tecnológica CCS</span><span class="es">Analista de datos, Tecnológica CCS</span></h3>
+          <p><span class="en">Power BI dashboards and business intelligence reporting.</span><span class="es">Dashboards en Power BI y reporting de inteligencia de negocio.</span></p>
+        </div>
+        <div class="tl-item current">
+          <span class="tl-year"><span class="en">Jul 2023 – Present</span><span class="es">jul 2023 – actualidad</span></span>
+          <h3>Data Scientist, Tecnológica CCS</h3>
+          <p><span class="en">AI systems for healthcare, industrial safety and sports performance, from prototype to production. LLM platforms, agents and agent harnesses.</span><span class="es">Sistemas de IA para salud, seguridad laboral y rendimiento deportivo, del prototipo a producción. Plataformas LLM, agentes y agent harnesses.</span></p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-year">2023 – 2024</span>
+          <h3><span class="en">M.Sc. in Data Science and Computer Engineering</span><span class="es">Máster en Ciencia de Datos e Ingeniería de Computadores</span></h3>
+          <p><span class="en">University of Granada.</span><span class="es">Universidad de Granada.</span></p>
+        </div>
+        <div class="tl-item current">
+          <span class="tl-year"><span class="en">Nov 2024 – Present</span><span class="es">nov 2024 – actualidad</span></span>
+          <h3><span class="en">Ph.D. Candidate, Intelligent Decision Support Systems</span><span class="es">Doctorando, Sistemas Inteligentes de Apoyo a la Decisión</span></h3>
+          <p><span class="en">University of Granada — DaSCI and ibs.GRANADA (MP10 – Translational Bioinformatics). Hybrid algorithms for longitudinal recommender systems.</span><span class="es">Universidad de Granada — DaSCI e ibs.GRANADA (MP10 – Bioinformática Traslacional). Algoritmos híbridos para sistemas de recomendación longitudinales.</span></p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-year"><span class="en">Jun – Sep 2025</span><span class="es">jun – sep 2025</span></span>
+          <h3><span class="en">Visiting Researcher, Glenn Biggs Institute</span><span class="es">Investigador visitante, Glenn Biggs Institute</span></h3>
+          <p><span class="en">UT Health San Antonio — research on non-invasive therapeutic interventions for Alzheimer's disease, in Dr. de Erausquin's group.</span><span class="es">UT Health San Antonio — investigación en intervenciones terapéuticas no invasivas para el Alzheimer, en el grupo del Dr. de Erausquin.</span></p>
+        </div>
+        <div class="tl-item current">
+          <span class="tl-year"><span class="en">Sep 2025 – Present</span><span class="es">sep 2025 – actualidad</span></span>
+          <h3><span class="en">Research Collaborator, Glenn Biggs Institute</span><span class="es">Colaborador de investigación, Glenn Biggs Institute</span></h3>
+          <p><span class="en">UT Health San Antonio (remote) — brain stimulation response research and the ISAVRAD multimodal patient database.</span><span class="es">UT Health San Antonio (en remoto) — investigación sobre respuesta a la estimulación cerebral y base de datos multimodal de pacientes ISAVRAD.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span class="en">Selected work</span><span class="es">Trabajo seleccionado</span></p>
+        <h2><span class="en">Research &amp; applied projects</span><span class="es">Investigación y proyectos aplicados</span></h2>
+      </div>
+
+      <p class="sub-eyebrow"><span class="en">Research</span><span class="es">Investigación</span></p>
+      <div class="project">
+        <div class="project-head">
+          <h3><span class="en">Longitudinal recommendation framework</span><span class="es">Framework de recomendación longitudinal</span></h3>
+          <span class="project-tag"><span class="en">Ph.D. thesis · UGR · DaSCI</span><span class="es">Tesis doctoral · UGR · DaSCI</span></span>
+        </div>
+        <p class="en">Hybrid unsupervised framework combining Graph Neural Networks, Non-negative Matrix Factorization and Reinforcement Learning to recommend decisions from how users evolve over time in real-world data, benchmarked against reinforcement-learning decision-recommendation systems from the ICU setting.</p>
+        <p class="es">Framework híbrido no supervisado que combina Graph Neural Networks, Non-negative Matrix Factorization y Reinforcement Learning para recomendar decisiones a partir de cómo evolucionan los usuarios en el tiempo en datos reales, comparado con sistemas de recomendación de decisiones basados en reinforcement learning del entorno UCI.</p>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3>VascularNet</h3>
+          <span class="project-tag"><span class="en">Ph.D. research · UTRGV · UGR</span><span class="es">Investigación doctoral · UTRGV · UGR</span></span>
+        </div>
+        <p class="en">End-to-end deep learning architecture for ophthalmological image analysis, developed in collaboration between UTRGV and the University of Granada. A two-stage system segments retinal vessels into artery/vein/background and classifies glaucoma risk from the segmented vascular pattern, jointly optimizing both tasks.</p>
+        <p class="es">Arquitectura de deep learning end-to-end para el análisis de imagen oftalmológica, desarrollada en colaboración entre UTRGV y la Universidad de Granada. Un sistema en dos etapas segmenta los vasos retinianos en arteria/vena/fondo y clasifica el riesgo de glaucoma a partir del patrón vascular segmentado, optimizando ambas tareas de forma conjunta.</p>
+        <p class="metrics"><span class="en">Segmentation F1 0.96 · Classification AUC 0.83 · datasets: HRF / LES-AV / LAG · poster at the DaSCI Predoctoral Conference</span><span class="es">F1 segmentación 0,96 · AUC clasificación 0,83 · datasets: HRF / LES-AV / LAG · póster en las Jornadas Predoctorales del DaSCI</span></p>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3><span class="en">Brain stimulation response</span><span class="es">Respuesta a la estimulación cerebral</span></h3>
+          <span class="project-tag">Glenn Biggs Institute · UT Health San Antonio</span>
+        </div>
+        <p class="en">Analysis of individual response to non-invasive and invasive brain stimulation, using EEG under 40 Hz sensory stimulation and fNIRS under rTMS and DBS, including longitudinal data from a clinical study of sensory stimulation in Alzheimer's disease run with an industry partner.</p>
+        <p class="es">Análisis de la respuesta individual a la estimulación cerebral no invasiva e invasiva, con EEG bajo estimulación sensorial a 40 Hz y fNIRS bajo rTMS y DBS, incluyendo datos longitudinales de un estudio clínico de estimulación sensorial en Alzheimer realizado con un socio de la industria.</p>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3><span class="en">EEG during esketamine treatment for depression</span><span class="es">EEG durante el tratamiento con esketamina para la depresión</span></h3>
+          <span class="project-tag"><span class="en">Clinical research collaboration · Texas · ongoing</span><span class="es">Colaboración de investigación clínica · Texas · en curso</span></span>
+        </div>
+        <p class="en">Pilot monitoring of brain activity with EEG during esketamine administration for treatment of depression, in collaboration with a clinical partner, to characterize the neurophysiological response to treatment.</p>
+        <p class="es">Monitorización piloto de la actividad cerebral con EEG durante la administración de esketamina para el tratamiento de la depresión, en colaboración con un socio clínico, para caracterizar la respuesta neurofisiológica al tratamiento.</p>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3><span class="en">ISAVRAD multimodal patient database</span><span class="es">Base de datos multimodal de pacientes ISAVRAD</span></h3>
+          <span class="project-tag">Glenn Biggs Institute · AWS</span>
+        </div>
+        <p class="en">Cloud database on AWS integrating multimodal patient data — genetics, proteomics, cognitive tests, clinical history and brain volumetry — to support the ISAVRAD research project.</p>
+        <p class="es">Base de datos en la nube (AWS) que integra datos multimodales de pacientes — genética, proteómica, tests cognitivos, historia clínica y volumetría cerebral — como soporte al proyecto de investigación ISAVRAD.</p>
+      </div>
+
+      <p class="sub-eyebrow"><span class="en">Applied projects — Tecnológica CCS</span><span class="es">Proyectos aplicados — Tecnológica CCS</span></p>
+      <div class="project">
+        <div class="project-head">
+          <h3>BEGUIA</h3>
+          <span class="project-tag"><span class="en">Tecnológica CCS · LLM platform</span><span class="es">Tecnológica CCS · plataforma LLM</span></span>
+        </div>
+        <p class="en">LLM-based platform that turns a short company brief into a full strategic consulting report. Led the project end to end, from design to production.</p>
+        <p class="es">Plataforma basada en LLM que convierte un breve resumen de una empresa en un informe completo de consultoría estratégica. Lideré el proyecto de principio a fin, del diseño a producción.</p>
+        <p class="metrics"><a href="https://beguia.com" target="_blank" rel="noopener">beguia.com ↗</a></p>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3>Del dato al flow</h3>
+          <span class="project-tag"><span class="en">Tecnológica CCS · in development</span><span class="es">Tecnológica CCS · en desarrollo</span></span>
+        </div>
+        <p class="en">Data-driven cognitive performance program for athletes, built with a coaching partner. Leading the data model and the architecture that goes from capture instruments (wearables, EEG, motion sensors, validated psychometric questionnaires) to per-athlete flow profiles, alerts and recommendations.</p>
+        <p class="es">Programa de rendimiento cognitivo para deportistas basado en datos, desarrollado junto a un socio de coaching. Lidero el modelo de datos y la arquitectura que va desde los instrumentos de captura (wearables, EEG, sensores de movimiento y cuestionarios psicométricos validados) hasta perfiles de flow, alertas y recomendaciones por atleta.</p>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3><span class="en">Real-time ICU patient monitoring</span><span class="es">Monitorización de pacientes de UCI en tiempo real</span></h3>
+          <span class="project-tag">Tecnológica CCS · UGR · Hospital San Cecilio, Granada</span>
+        </div>
+        <p class="en">Built the communication interface between ICU bedside monitoring equipment and iNTELLIGENTiCU, an ML analytics platform. Designed the data integration pipeline transmitting real-time vital signs from patient beds, and led the on-site installation and deployment of the full monitoring infrastructure at Hospital San Cecilio.</p>
+        <p class="es">Desarrollé la interfaz de comunicación entre los monitores de cabecera de la UCI e iNTELLIGENTiCU, una plataforma analítica de machine learning. Diseñé el pipeline de integración que transmite las constantes vitales en tiempo real desde las camas y lideré la instalación y el despliegue en el propio Hospital San Cecilio de toda la infraestructura de monitorización.</p>
+        <p class="metrics"><span class="en">In the press:</span><span class="es">En prensa:</span> <a href="https://efe.com/salud/2022-11-27/inteligencia-artificial-aliado-en-vida-y-despues-muerte/" target="_blank" rel="noopener">EFE, Nov 2022 ↗</a> · <a href="https://www.granadahoy.com/granada/Inteligencia-Artificial-Granada-aliado-vida-muerte_0_1742226147.html" target="_blank" rel="noopener">Granada Hoy ↗</a> — <span class="en">the project and its planned rollout at San Cecilio</span><span class="es">el proyecto y su implantación prevista en el San Cecilio</span></p>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3><span class="en">Real-time PPE detection for construction safety</span><span class="es">Detección de EPIs en tiempo real en obras</span></h3>
+          <span class="project-tag">Tecnológica CCS · FLC Navarra</span>
+        </div>
+        <p class="en">Led a computer vision system for automated detection of helmets, vests, gloves and other protective equipment on construction sites, with real-time compliance alerts. Presented at the Fundación Laboral de la Construcción de Navarra conference, 2024.</p>
+        <p class="es">Lideré un sistema de visión artificial para la detección automática de cascos, chalecos, guantes y otros equipos de protección individual en obras de construcción, con alertas de cumplimiento en tiempo real. Presentado en la jornada de la Fundación Laboral de la Construcción de Navarra, 2024.</p>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3><span class="en">LLM agents &amp; agent harnesses</span><span class="es">Agentes LLM y agent harnesses</span></h3>
+          <span class="project-tag">Tecnológica CCS</span>
+        </div>
+        <p class="en">Design and development of LLM agents and the harnesses that run them, for internal and client projects.</p>
+        <p class="es">Diseño y desarrollo de agentes LLM y de los harnesses que los ejecutan, para proyectos internos y de cliente.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="teaching">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span class="en">Teaching &amp; talks</span><span class="es">Docencia y charlas</span></p>
+        <h2><span class="en">Courses &amp; talks</span><span class="es">Cursos y charlas</span></h2>
+      </div>
+      <div class="pub">
+        <h3><span class="en">Introduction to Machine Learning</span><span class="es">Introducción a Machine Learning</span></h3>
+        <p class="pub-meta"><span class="en">In-person course · CIMA Formación · 2023</span><span class="es">Curso presencial · CIMA Formación · 2023</span></p>
+      </div>
+      <div class="pub">
+        <h3><span class="en">Research and Debate Conference on the Impact of Artificial Intelligence in Spain: Technical, Ethical, Legal, Socio-Economic and Cultural Challenges in Navarre</span><span class="es">Jornada de investigación y debate sobre el impacto de la inteligencia artificial en España: retos técnicos, éticos, jurídicos, socioeconómicos y culturales en Navarra</span></h3>
+        <p class="pub-meta"><span class="en">Speaker, representing Tecnológica CCS · CIVICAN, Fundación Caja Navarra, Pamplona</span><span class="es">Ponente en representación de Tecnológica CCS · CIVICAN, Fundación Caja Navarra, Pamplona</span></p>
+        <p class="pub-meta" style="margin-top:4px;"><span class="en">Organized by the TELSEC4TAI National Network and the GIARA group, Public University of Navarra</span><span class="es">Organizada por la Red Nacional TELSEC4TAI y el grupo GIARA de la Universidad Pública de Navarra</span></p>
+      </div>
+      <div class="pub">
+        <h3><span class="en">Real-time PPE detection for construction safety</span><span class="es">Detección de EPIs en tiempo real en obras</span></h3>
+        <p class="pub-meta"><span class="en">Presenter · Fundación Laboral de la Construcción de Navarra conference · 2024</span><span class="es">Ponente · Jornada de la Fundación Laboral de la Construcción de Navarra · 2024</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="publications">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span class="en">Publications</span><span class="es">Publicaciones</span></p>
+        <h2><span class="en">Papers &amp; posters</span><span class="es">Artículos y pósters</span></h2>
+      </div>
+      <div class="pub">
+        <h3>VascularNet: A Deep Learning Architecture for Automated Retinal Vessel Segmentation and Glaucoma Detection Through Vascular Pattern Analysis</h3>
+        <p class="pub-meta"><span class="en">Poster · DaSCI Institute Predoctoral Conference (Jornadas Predoctorales del Instituto DaSCI)</span><span class="es">Póster · Jornadas Predoctorales del Instituto DaSCI</span></p>
+      </div>
+      <div class="pub">
+        <h3>Explainable Machine Learning Models Using Robust Cancer Biomarkers Identification from Paired Differential Gene Expression</h3>
+        <p class="pub-meta">International Journal of Molecular Sciences · <span class="en">Nov 2024</span><span class="es">nov 2024</span> · <a href="https://doi.org/10.3390/ijms252212419" target="_blank" rel="noopener">DOI: 10.3390/ijms252212419</a></p>
+        <p class="pub-meta" style="margin-top:4px;"><span class="en">With</span><span class="es">Con</span> Elisa Díaz de la Guardia Bolívar, Juan E. Martínez-Manjón, Igor Zwir, Coral del Val.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <p class="eyebrow"><span class="en">Contact</span><span class="es">Contacto</span></p>
+      <h2><span class="en">Get in touch</span><span class="es">Hablemos</span></h2>
+      <p class="en">Open to collaborations at the intersection of applied machine learning and healthcare — medical imaging, clinical monitoring, longitudinal data, LLM-based systems, or research partnerships.</p>
+      <p class="es">Abierto a colaboraciones entre el machine learning aplicado y la salud: imagen médica, monitorización clínica, datos longitudinales, sistemas basados en LLM o proyectos de investigación conjuntos.</p>
+      <div class="contact-links">
+        <a href="mailto:davidperezfil@gmail.com">davidperezfil@gmail.com</a>
+        <a href="https://www.linkedin.com/in/david-perez-filgueiras/" target="_blank" rel="noopener">linkedin.com/in/david-perez-filgueiras</a>
+        <a href="https://orcid.org/0009-0009-9760-6300" target="_blank" rel="noopener">orcid.org/0009-0009-9760-6300</a>
+        <a href="CV_David_Perez_Filgueiras.pdf" target="_blank" rel="noopener"><span class="en">Download CV (PDF)</span><span class="es">Descargar CV (PDF)</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>David Pérez Filgueiras</p>
+    <p><span class="en">Pamplona · Granada — updated 2026</span><span class="es">Pamplona · Granada — actualizado en 2026</span></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('langToggle');
+  var meta = document.querySelector('meta[name="description"]');
+  var desc = {
+    en: 'Data Scientist and Ph.D. Researcher working on applied AI systems, LLM agents and intelligent decision support, at the intersection of healthcare and machine learning.',
+    es: 'Data Scientist e investigador predoctoral en sistemas de IA aplicada, agentes LLM y sistemas inteligentes de apoyo a la decisión, entre la salud y el machine learning.'
+  };
+
+  function setLang(lang){
+    document.body.classList.toggle('es', lang === 'es');
+    document.documentElement.lang = lang;
+    btn.textContent = lang === 'es' ? 'EN' : 'ES';
+    btn.setAttribute('aria-label', lang === 'es' ? 'Switch to English' : 'Cambiar a español');
+    if (meta) meta.setAttribute('content', desc[lang]);
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+  }
+
+  var saved = null;
+  try { saved = localStorage.getItem('lang'); } catch (e) {}
+  var browserEs = (navigator.language || '').toLowerCase().indexOf('es') === 0;
+  setLang(saved === 'es' || saved === 'en' ? saved : (browserEs ? 'es' : 'en'));
+
+  btn.addEventListener('click', function(){
+    setLang(document.body.classList.contains('es') ? 'en' : 'es');
+  });
+})();
+</script>
+
+</body>
+</html>
